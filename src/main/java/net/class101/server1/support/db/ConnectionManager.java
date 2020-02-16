@@ -17,11 +17,15 @@ public class ConnectionManager {
     private static final String PASSWORD = "jdbc.password";
 
     public static DataSource getDataSource() {
-        return getBasicDataSource();
+        return getBasicDataSource(LOCAL_DATABASE_PATH);
     }
 
-    private static BasicDataSource getBasicDataSource() {
-        Properties properties = setProperties(ConnectionManager.LOCAL_DATABASE_PATH);
+    public static DataSource getDataSource(String path) {
+        return getBasicDataSource(path);
+    }
+
+    private static BasicDataSource getBasicDataSource(String path) {
+        Properties properties = setProperties(path);
 
         String dbDriver = properties.getProperty(DRIVER_CLASS);
         String dbUrl = properties.getProperty(URL);
