@@ -117,7 +117,6 @@ class OrderServiceTest {
 
         verify(orderDao, atLeastOnce()).findById(6);
         verify(orderDao, atLeastOnce()).update(new OrderItem(6, "키트", "testName6", 15000, 1));
-
     }
 
     private List<Item> getMenuItem() {
