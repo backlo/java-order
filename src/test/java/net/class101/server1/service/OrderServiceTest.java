@@ -107,6 +107,19 @@ class OrderServiceTest {
         assertThat(orderService.getTotalPrice(includeDeliveryFeeItems).getTotalPrice()).isEqualTo(54999);
     }
 
+    @Test
+    @DisplayName("새로 주문한 물건이 맵에 잘 들어가는 테스트")
+    void getNewItemAmount() {
+        when(orderDao.findById(6)).thenReturn(new OrderItem(6, "키트", "testName6", 15000, 3));
+
+        assertThat(orderService.getOrderList(6, 2, getOrderListItems())
+                .get(new OrderItem(6, "키트", "testName6", 15000, 3))).isEqualTo(2);
+
+        verify(orderDao, atLeastOnce()).findById(6);
+        verify(orderDao, atLeastOnce()).update(new OrderItem(6, "키트", "testName6", 15000, 1));
+
+    }
+
     private List<Item> getMenuItem() {
         return Arrays.asList(
                 new MenuItem(1, "testName1", 50000, 99999),
@@ -120,19 +133,13 @@ class OrderServiceTest {
 
     private Map<Item, Integer> getOrderListItems() {
         Map<Item, Integer> items = new HashMap<>();
-        items.put(new OrderItem(1, "클래스", "testName1", 50000, 9999), 1);
+        items.put(new OrderItem(1, "클래스", "testName1", 50000, 99999), 1);
         items.put(new OrderItem(2, "키트", "testName2", 10000, 2), 1);
-        items.put(new OrderItem(3, "클래스", "testName3", 60000, 9999), 1);
+        items.put(new OrderItem(3, "클래스", "testName3", 60000, 99999), 1);
         items.put(new OrderItem(4, "키트", "testName4", 200000, 4), 1);
-        items.put(new OrderItem(5, "클래스", "testName5", 300000, 9999), 1);
+        items.put(new OrderItem(5, "클래스", "testName5", 300000, 99999), 1);
 
         return items;
-    }
-
-    @Test
-    @DisplayName("새로 주문한 물건이 맵에 잘 들어가는 테스트")
-    void getNewItemAmount() {
-
     }
 
 }

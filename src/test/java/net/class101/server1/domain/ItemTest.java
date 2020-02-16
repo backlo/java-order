@@ -31,7 +31,7 @@ class ItemTest {
         ORDER_LIST.put(new OrderItem(4, "키트", "test4", 200000, 2), 4);
         ORDER_LIST.put(new OrderItem(5, "클래스", "test5", 300000, 99999), 1);
 
-        kitItem = new OrderItem(4, "키트", "test4", 200000, 1);
+        kitItem = new OrderItem(4, "키트", "test4", 200000, 2);
         classItem = new OrderItem(5, "클래스", "test5", 300000, 99999);
         soldOutItem = new OrderItem(7, "키트", "soldOutTest", 10000, 0);
     }
@@ -51,7 +51,7 @@ class ItemTest {
     @Test
     @DisplayName("남은 재고 이상으로 구매할 경우 예외처리 되는지 테스트")
     void checkExcessAmountStockNumberTest() {
-        assertThrows(CannotBuyExcessAmountException.class, () -> kitItem.checkAvailableForPurchase(2));
+        assertThrows(CannotBuyExcessAmountException.class, () -> kitItem.checkAvailableForPurchase(3));
     }
 
     @Test
@@ -89,7 +89,7 @@ class ItemTest {
     @Test
     @DisplayName("item이 키트인 경우 재고수 테스트")
     void subtractKitStockNumberTest() {
-        Item expectKitItem =  new OrderItem(4, "키트", "test4", 200000, 0);
+        Item expectKitItem =  new OrderItem(4, "키트", "test4", 200000, 1);
         assertThat(kitItem.subtractStockNumber(ITEM_AMOUNT)).isEqualTo(expectKitItem);
     }
 
