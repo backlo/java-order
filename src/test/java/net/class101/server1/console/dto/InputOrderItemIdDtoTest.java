@@ -18,7 +18,7 @@ class InputOrderItemIdDtoTest {
     }
 
     @Test
-    @DisplayName("빈칸 입력시 -1이 되는 테스")
+    @DisplayName("빈칸 입력시 -1이 되는 테스트")
     void checkExitTest() {
         inputOrderItemIdDto = new InputOrderItemIdDto("");
         assertThat(inputOrderItemIdDto.getItemId()).isEqualTo(-1);
