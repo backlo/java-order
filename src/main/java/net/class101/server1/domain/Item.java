@@ -75,6 +75,10 @@ public abstract class Item {
         return stockNumber;
     }
 
+    public String getKind() {
+        return kind;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
