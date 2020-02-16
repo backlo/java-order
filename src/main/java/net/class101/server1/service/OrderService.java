@@ -29,17 +29,21 @@ public class OrderService {
 
     public Map<Item, Integer> getOrderList(int itemId, int itemAmount, Map<Item, Integer> orderList) {
         try {
-            Item findItem = orderDao.findById(itemId).checkAvailableForPurchase(itemAmount);
-
-            orderList = addOrderList(findItem, itemAmount, orderList);
-            orderDao.update(findItem.subtractStockNumber(itemAmount));
-
+            synchronized (this) {
+                Item findItem = findById(itemId).checkAvailableForPurchase(itemAmount);
+                orderList = addOrderList(findItem, itemAmount, orderList);
+                orderDao.update(findItem.subtractStockNumber(itemAmount));
+            }
             return orderList;
         } catch (EmptyResultDataAccessException e) {
             throw new OrderServiceException();
         } catch (SoldOutException | CannotBuyDuplicateClassException | CannotBuyExcessAmountException e) {
             throw new OrderServiceException(e);
         }
+    }
+
+    public Item findById(int itemId) {
+        return orderDao.findById(itemId);
     }
 
     private Map<Item, Integer> addOrderList(Item findItem, int itemAmount, Map<Item, Integer> orderList) {
