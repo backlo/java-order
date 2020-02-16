@@ -32,13 +32,6 @@ public class OrderDao {
         return jdbcTemplate.update(query, findItem.getStockNumber(), findItem.getId());
     }
 
-    public int insert(Item item) {
-        String query = "INSERT INTO ITEMS VALUES(?, ?, ?, ?, ?)";
-        return jdbcTemplate.update(query, item.getId(),
-                item.getKind(), item.getName(),
-                item.getPrice(), item.getStockNumber());
-    }
-
     private Item getMenuItem(ResultSet rs, int rowNum) throws SQLException {
         return new MenuItem(rs.getInt("id"),
                 rs.getString("name"),
