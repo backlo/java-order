@@ -18,7 +18,7 @@ class InputOrderItemAmountDtoTest {
     }
 
     @Test
-    @DisplayName("상품 양 숫자 외 형식 예외처리 테스트")
+    @DisplayName("상품 양 정수 형식이 아닌 다른 형식이 오면 예외처리 하는 테스트")
     void checkValidItemAmountNumberFormatExceptionTest() {
         assertThrows(NumberFormatException.class, () -> inputOrderItemAmountDto = new InputOrderItemAmountDto("a"));
         assertThrows(NumberFormatException.class, () -> inputOrderItemAmountDto = new InputOrderItemAmountDto("1.1"));
