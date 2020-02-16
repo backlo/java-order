@@ -71,7 +71,7 @@ class ItemTest {
         items.put(new OrderItem(4, "키트", "test4", 200000, 2), 4);
         items.put(new OrderItem(5, "클래스", "test5", 300000, 99999), 1);
 
-        return  items;
+        return items;
     }
 
     @Test
@@ -86,10 +86,11 @@ class ItemTest {
         Item expectClassItem = new OrderItem(5, "클래스", "test5", 300000, 99999);
         assertThat(classItem.subtractStockNumber(ITEM_AMOUNT)).isEqualTo(expectClassItem);
     }
+
     @Test
     @DisplayName("item이 키트인 경우 재고수 테스트")
     void subtractKitStockNumberTest() {
-        Item expectKitItem =  new OrderItem(4, "키트", "test4", 200000, 1);
+        Item expectKitItem = new OrderItem(4, "키트", "test4", 200000, 1);
         assertThat(kitItem.subtractStockNumber(ITEM_AMOUNT)).isEqualTo(expectKitItem);
     }
 

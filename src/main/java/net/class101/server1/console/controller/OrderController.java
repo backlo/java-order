@@ -1,13 +1,13 @@
 package net.class101.server1.console.controller;
 
+import net.class101.server1.console.OrderInputView;
+import net.class101.server1.console.OrderOutputView;
 import net.class101.server1.console.dto.InputOrderItemAmountDto;
 import net.class101.server1.console.dto.InputOrderItemIdDto;
 import net.class101.server1.console.dto.InputTopMenuDto;
-import net.class101.server1.console.OrderInputView;
-import net.class101.server1.console.OrderOutputView;
+import net.class101.server1.console.dto.exception.NoMatchTopMenuInitialsException;
 import net.class101.server1.domain.Item;
 import net.class101.server1.domain.Price;
-import net.class101.server1.console.dto.exception.NoMatchTopMenuInitialsException;
 import net.class101.server1.service.OrderService;
 import net.class101.server1.support.exception.CanNotReadFileException;
 
@@ -83,7 +83,7 @@ public class OrderController {
     }
 
     private void doPayment(Map<Item, Integer> orderList) {
-        if(orderList.isEmpty()) {
+        if (orderList.isEmpty()) {
             return;
         }
         outputView.showOrderList(orderList);

@@ -2,11 +2,9 @@ package net.class101.server1;
 
 import net.class101.server1.domain.Item;
 import net.class101.server1.service.OrderService;
-import net.class101.server1.service.exception.OrderServiceException;
 import net.class101.server1.support.context.ContextLoaderListener;
 import net.class101.server1.util.OrderRequestThread;
 import net.class101.server1.util.ThreadExceptionHandler;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +14,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class SeverContainerInitializerTest {
 
@@ -44,7 +42,8 @@ class SeverContainerInitializerTest {
             Map<Item, Integer> orderList = new HashMap<>();
             executorService.execute(new OrderRequestThread(orderList, orderService, 58395, 1, executorService));
         }
-        while (!executorService.isTerminated()) {}
+        while (!executorService.isTerminated()) {
+        }
 
         assertThat(handler.getErrorMessage()).isEqualTo("재고가 없습니다. 다시 선택 해주세요!");
     }

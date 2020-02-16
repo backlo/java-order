@@ -30,7 +30,8 @@ public class ServerContainerInitializer {
                 occurThreadException(exceptionHandler);
             }
 
-            while (!executorService.isTerminated()) { }
+            while (!executorService.isTerminated()) {
+            }
             System.out.println("All Requests are completed");
         } catch (CanNotReadFileException e) {
             System.out.println("Can Not ReadFile. So Please Check This File And Try it Again.");
